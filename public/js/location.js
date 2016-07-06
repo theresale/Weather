@@ -11,9 +11,9 @@ function Location(){
 	}
 
 	this.getLocationWithInput = function(){
-		var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452&key=AIzaSyDp2dB8A9x9BAGplFjWAqWHNUi256c6pWk";
+		var url = "https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=AIzaSyDp2dB8A9x9BAGplFjWAqWHNUi256c6pWk";
 		$.getJSON(url, function(data){
-			console.log(data);
+			console.log(data)
 		})
 
 	}
