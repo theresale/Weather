@@ -1,0 +1,22 @@
+{
+  "name": "weather",
+  "version": "1.0.0",
+  "description": "weather forecast lab",
+  "main": "server.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/theresale/Weather.git"
+  },
+  "author": "theresa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/theresale/Weather/issues"
+  },
+  "homepage": "https://github.com/theresale/Weather#readme"
+}
