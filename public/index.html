@@ -30,21 +30,17 @@ Get weather from IP Address (not very accurate):<button type="button" id="button
         google.maps.event.addListener(autocomplete, 'place_changed', function () {
 
         var place = autocomplete.getPlace();
-        console.log(place);
-        var location = place.formatted_address + "<br/>";
-        location += "Latitude: " + place.geometry.viewport.f.b + "<br/>";
-        location += "Longitude: " + place.geometry.viewport.b.b;
-        document.getElementById('lblresult').innerHTML = location
+        //console.log(place);
+        var latitude = place.geometry.viewport.f.b;
+        var longitude = place.geometry.viewport.b.b;
+        myLocation.getWeather(latitude,longitude);
         });
     };
 
 </script>
 
 <span>Location:</span><input type="text" id="txtautocomplete" style="width:200px" placeholder="Enter your address" /><br /><br />
-<label id="lblresult"></label>
-
-
-
+<!--<label id="lblresult"></label>-->
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
