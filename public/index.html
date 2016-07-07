@@ -18,10 +18,9 @@
 <div id="status">
 </div>
 
-Get weather from IP Address (not very accurate):<button type="button" id="button" onclick="myLocation.getLocationWithIp()">Get Lat/Lng</button><br />
+Get weather from IP Address (not very accurate):<button type="button" id="button" onclick="myLocation.getLocationWithIp(myLocation.getWeather)">Get Lat/Lng</button><br />
 
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTxEl6TmAa7cqiVcBNNsKeSx4Ip3tX1GI&libraries=places"></script>
-
 
 <script type="text/javascript">
     google.maps.event.addDomListener(window, 'load', intilize);
@@ -38,10 +37,15 @@ Get weather from IP Address (not very accurate):<button type="button" id="button
         document.getElementById('lblresult').innerHTML = location
         });
     };
+
 </script>
 
 <span>Location:</span><input type="text" id="txtautocomplete" style="width:200px" placeholder="Enter your address" /><br /><br />
 <label id="lblresult"></label>
+
+
+
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 <!-- location api -->
@@ -53,10 +57,8 @@ Get weather from IP Address (not very accurate):<button type="button" id="button
 <script src="js/weather.js"></script>
 <script src="js/location.js"></script>
 <script src="js/facebook.js"></script>
+<script src="js/address.js"></script>
 <script src="js/app.js"></script>
-
-
-
 
 </body>
 </html>

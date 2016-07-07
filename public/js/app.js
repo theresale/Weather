@@ -1,9 +1,11 @@
 "use strict";
 
 var myWeather = new Weather();
-//myWeather.getWeather();
+var facebook = new Facebook();
 
-var myLocation = new Location();
+var address = new Address();
+address.getLocationWithInput();
+
+var myLocation = new IpLocation();
 myLocation.getLocationWithIp(myLocation.getWeather);
-myLocation.getLocationWithInput();
 
