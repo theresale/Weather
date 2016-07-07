@@ -23,8 +23,10 @@ function getJSON(url, callback) { //replacement for $.getJSON
 }
 
 app.get("/weather", function(request,response){
-	var url = "	https://api.forecast.io/forecast/f61a611d2c990a1d977d6264c9a5d364/37.8267,-122.423";
+	var url = "https://api.forecast.io/forecast/f61a611d2c990a1d977d6264c9a5d364/"+request.query.latitude+","+request.query.longitude;
 	getJSON(url, function(error,data){
+		console.log(error);
+		console.log(data);
 		response.send(JSON.stringify(data));
 		});
 });

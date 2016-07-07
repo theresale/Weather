@@ -1,12 +1,9 @@
-(function(){ 
 "use strict";
 
 var myWeather = new Weather();
-myWeather.getWeather();
+//myWeather.getWeather();
 
 var myLocation = new Location();
-myLocation.getLocationWithIp();
+myLocation.getLocationWithIp(myLocation.getWeather);
 myLocation.getLocationWithInput();
 
-
-})();
