@@ -22,7 +22,7 @@ function IpLocation(){
 	}
 
 	this.makeWeatherTable = function(forecast){
-		var buildTable = "<table><tr><th>" + "Day" + "</th><th>" + "High Temp" + "</th><th>" + "Low Temp" + "</th><th>" + "Summary" + "</th></tr>";
+		var buildTable = "<table class='table'><tr><th>" + "Day" + "</th><th>" + "High Temp" + "</th><th>" + "Low Temp" + "</th><th>" + "Summary" + "</th></tr>";
 		for (var i=0; i < 5; i++) {	
 			buildTable += "<tr><td>" + (i+1) + "</td><td>" + forecast.data[i].temperatureMax + "</td><td>" + forecast.data[i].temperatureMin + "</td><td>" + forecast.data[i].summary + "</td></tr>"; 
 		}
