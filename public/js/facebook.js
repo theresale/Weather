@@ -1,5 +1,6 @@
 "use strict";
-  
+ function Facebook(){ 
+
   window.fbAsyncInit = function() {
     FB.init({
       appId      : '995990820516035',
@@ -30,7 +31,7 @@
       }
   }
 
-  function checkLoginState() {
+  window.checkLoginState = function() {
       FB.getLoginStatus(function(response) {
         statusChangeCallback(response);
       });
@@ -65,19 +66,30 @@
     }, {scope: 'user_location' });
   }
 
-  function testAPI() {
+  function testAPI(callback) {
       console.log('Welcome!  Fetching your information.... ');
       FB.api('/me?fields=location', function(response) {
-        console.log(response.location.name);
+      console.log(response.location.name);
+        
       });
   }
 
-  /*
-  finds lat & lng from address
-  this.getLocationWithInput = function(){
-    var url = "https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=AIzaSyDp2dB8A9x9BAGplFjWAqWHNUi256c6pWk";
-    $.getJSON(url, function(data){
+
+}
+ /* function getLocationWithFacebook(){
+    var url = "https://maps.googleapis.com/maps/api/geocode/json?address="+location+"&key=AIzaSyDp2dB8A9x9BAGplFjWAqWHNUi256c6pWk";
+    $.getJSON(url, function(){
       console.log(data)
     });
-  }*/
+  }
+
+  this.getWeather = function(latitude,longitude){
+    $.getJSON ("/weather?latitude="+latitude+"&longitude="+longitude,function(data){
+      console.log(data.daily);*/
+
+
+
+
+
+
 

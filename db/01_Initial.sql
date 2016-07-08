@@ -1,19 +1,22 @@
-DROP TABLE IF EXISTS profile;
-DROP TABLE IF EXISTS post;
+DROP TABLE IF EXISTS location;
+DROP TABLE IF EXISTS forecast;
 
-CREATE TABLE profile (
+CREATE TABLE location (
 	id 			serial PRIMARY KEY,
-	username 	text,
-	email 		text 
+	latitude 	numeric,
+	longitude	numeric,
+	query_date  timestamp with time zone NOT NULL 
 );
 
-CREATE TABLE post (
+CREATE TABLE forecast (
 	id 			serial PRIMARY KEY,
-	body 		text,
-	post_date	timestamp with time zone NOT NULL,
-	profile_id  integer,
+	temp_high	integer,
+	temp_low	integer,
+	summary		text,
+	precip		numeric,
+	location_ID	integer,
 
-	CONSTRAINT fk_post_to_profile
-		FOREIGN KEY (profile_id)
-		REFERENCES profile (id)  
+		CONSTRAINT fk_forecast_to_location
+		FOREIGN KEY (location_id)
+		REFERENCES weather (id)  
 );

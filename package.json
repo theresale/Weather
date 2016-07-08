@@ -4,6 +4,7 @@
   "description": "weather forecast lab",
   "main": "server.js",
   "dependencies": {
+    "node-sass": "^3.8.0",
     "pg": "^6.0.1"
   },
   "devDependencies": {},
