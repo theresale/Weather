@@ -1,7 +1,7 @@
 "use strict";
 
 var myWeather = new Weather();
-var facebook = new Facebook();
+//var facebook = new Facebook();
 
 var address = new Address();
 //address.getLocationWithInput();

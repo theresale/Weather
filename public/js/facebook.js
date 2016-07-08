@@ -1,6 +1,5 @@
 "use strict";
-
-function Facebook(){
+  
   window.fbAsyncInit = function() {
     FB.init({
       appId      : '995990820516035',
@@ -72,7 +71,6 @@ function Facebook(){
         console.log(response.location.name);
       });
   }
-}
 
 
 

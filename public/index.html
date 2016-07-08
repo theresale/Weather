@@ -12,13 +12,9 @@
 
 <body>
 
-<fb:login-button scope="public_profile,user_location" onlogin="checkLoginState();">
-</fb:login-button>
-
-<div id="status">
+<div class="page-header"><center>
+  <h1>GET YOUR 5 DAY FORECAST <br><small>Use Facebook, your current location, or your computer's IP address to get the weather!</small></h1></center>
 </div>
-
-Get weather from IP Address (not very accurate):<button type="button" id="button" onclick="myLocation.getLocationWithIp(myLocation.getWeather)">Get Lat/Lng</button><br />
 
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTxEl6TmAa7cqiVcBNNsKeSx4Ip3tX1GI&libraries=places"></script>
 
@@ -41,6 +37,20 @@ Get weather from IP Address (not very accurate):<button type="button" id="button
 
 <span>Location:</span><input type="text" id="txtautocomplete" style="width:200px" placeholder="Enter your address" /><br /><br />
 <!--<label id="lblresult"></label>-->
+
+<fb:login-button scope="public_profile,user_location" onlogin="checkLoginState();">
+</fb:login-button>
+
+<div id="status"></div>
+
+<div class="btn-group btn-group-justified" role="group" aria-label="find-weather">
+<div class="btn-group" role="group">
+ 		<button type="button" class="btn btn-default" id="facebook-button" onclick="">Facebook</button>
+ </div><div class="btn-group" role="group"> 
+ 		<button type="button" class="btn btn-default" id="ip-button" onclick="myLocation.getLocationWithIp(myLocation.getWeather)">IP Address</button>
+ </div><div class="btn-group" role="group">
+ 		<button type="button" class="btn btn-default" id="location-button" onclick="">Location</button>
+ </div></div>
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
