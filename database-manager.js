@@ -25,24 +25,37 @@ module.exports = (function() {
 			}
 		);
 	}
-	var readLocation = function(latitude,longitude,query_date){
+	var readLocation = function(latitude,longitude,query_date) {
 		pool.query(
 			//extract day from query day here
-			var query_day = 
+			//var query_day = 
 			"SELECT * FROM location"+
 			"WHERE latitude<$1+1 AND latitude>$1-1"+
-			"AND longitude<$2+2 AND latitude>$2-2"+
-			"AND extract(DAY FROM query_date)=$3",[latitude,longitude,query_day], function(error, result){
+			"AND longitude<$2+1 AND longitude>$2-1"+
+			"AND extract(DAY FROM query_date)=$3", [latitude,longitude,query_day], function(error, result) {
 				if (error) {
 					return console.error(error);
 				}
 				console.log(result);
 			});
 	}
-
-	};
+	var saveForecast = function(temp_high,temp_low,summary,precip,location_ID) {
+		pool.query(
+			"INSERT INTO forecast" +
+			"(temp_high, temp_low, summary, precip, location_ID)" +
+			"VALUES ($1,$2,$3,$4,$5);", [temp_high,temp_low,summary,precip,location_ID], function(error,result) {
+				if (error) return console.error(error);
+				console.log(result);
+			}
+		);
+	}
+	var readForecast = function(location_ID) {
+		pool.query(
+			"SELECT * FROM forecast"+
+			"WHERE location_ID=$1", [location_ID], function(error,result) {
+				if (error) return console.error(error);
+				console.log(result);
+			}
+		);
+	}
 })(); //iffy, what the function returns is what's going to become module.exports
-
-/* somehwere else
-var databaseManager = require("./databse=manager.js");
-databaseManager.saveProfile(...);*/
