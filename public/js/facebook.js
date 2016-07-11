@@ -52,14 +52,21 @@ function Facebook(){
 
     this.getAPI = function(callback){
       FB.api('/me?fields=location', function(response) {
-        console.log(response.location.name);
+        callback(response.location.name);
       });
     }
 
+    this.getPartialFbLocation = function(callback){
+      return (location)=>{
+        this.getFbLocation(location,callback);
+      };
+    };
+
     this.getFbLocation = function(location,callback){
       var url = "https://maps.googleapis.com/maps/api/geocode/json?address="+location+"&key=AIzaSyDp2dB8A9x9BAGplFjWAqWHNUi256c6pWk";
-      $.getJSON(url, function(){
-          callback(geometry.location.lat,geometry.location.lng);
+      $.getJSON(url, function(response){
+        console.log(response);
+          callback(response.results[0].geometry.location.lat, response.results[0].geometry.location.lng);
       });
     }
 
