@@ -8,20 +8,20 @@ process.on("unhandledRejection", function(e){
 module.exports = (function() {
 	var config = {
 		host: 	  "localhost",
-		user: 	  "postgres",
-		password: "tyler04",
+		user: 	  "weather_server",
+		password: "weather1234",
 		database: "postgres"
 	};
 	var pool = new Pool(config);
 
-	var saveLocation = function(latitude,longitude,query_date) {
+	var saveLocation = function(latitude,longitude,query_date,callback) {
 		pool.query(
 			//format query date to fit SQL timestamp format
 			"INSERT INTO location" + 
 			"(latitude, longitude, query_date)" +
-			"VALUES ($1, $2, $3);", [latitude,longitude,query_date], function(error, result) { //security meausures
+			"VALUES ($1, $2, $3) RETURNING id;", [latitude,longitude,query_date], function(error, result) { //security meausures
 				if (error) return console.error(error);
-				console.log(result);
+				callback(result.rows[0].id);
 			}
 		);
 	}
@@ -45,7 +45,7 @@ module.exports = (function() {
 			"(temp_high, temp_low, summary, precip, location_ID)" +
 			"VALUES ($1,$2,$3,$4,$5);", [temp_high,temp_low,summary,precip,location_ID], function(error,result) {
 				if (error) return console.error(error);
-				console.log(result);
+				//console.log(result);
 			}
 		);
 	}
@@ -58,4 +58,14 @@ module.exports = (function() {
 			}
 		);
 	}
-})(); //iffy, what the function returns is what's going to become module.exports
+	/*var checkDatabase = function(latitude,longitude,query_date){
+		pool.query
+	}*/
+
+return {
+	saveLocation: saveLocation,
+	saveForecast: saveForecast,
+	readLocation: readLocation,
+	readForecast: readForecast
+};
+})(); //iife, what the function returns is what's going to become module.exports

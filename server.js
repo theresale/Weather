@@ -1,6 +1,6 @@
 var express = require("express");
 var app = express();
-//var databaseManager = require("./database-manager.js");
+var databaseManager = require("./database-manager.js"); //database connection
 
 app.use(express.static("public"));
 app.listen(3000,function(){
@@ -26,8 +26,19 @@ function getJSON(url, callback) { //replacement for $.getJSON
 app.get("/weather", function(request,response){
 	var url = "https://api.forecast.io/forecast/f61a611d2c990a1d977d6264c9a5d364/"+request.query.latitude+","+request.query.longitude;
 	getJSON(url, function(error,data){
-		console.log(error);
-		console.log(data);
+		//console.log(data.daily.data);
+		databaseManager.saveLocation(request.query.latitude, request.query.longitude, "07/11/2016", function(locationId){
+			for(var i = 0; i<5;i++){
+				//console.log(data.daily.data[i]);
+			databaseManager.saveForecast(Math.round(data.daily.data[i].apparentTemperatureMax),
+									 Math.round(data.daily.data[i].apparentTemperatureMin),
+									 data.daily.data[i].summary,
+									 data.daily.data[i].precipProbability,
+									 locationId);
+
+			}
+		});
+
 		response.send(JSON.stringify(data));
 		});
 });

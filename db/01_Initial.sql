@@ -8,6 +8,8 @@ CREATE TABLE location (
 	query_date  timestamp with time zone NOT NULL 
 );
 
+ALTER TABLE location OWNER TO weather_server;
+
 CREATE TABLE forecast (
 	id 			serial PRIMARY KEY,
 	temp_high	integer,
@@ -18,5 +20,7 @@ CREATE TABLE forecast (
 
 		CONSTRAINT fk_forecast_to_location
 		FOREIGN KEY (location_id)
-		REFERENCES weather (id)  
+		REFERENCES location (id)  
 );
+
+ALTER TABLE forecast OWNER TO weather_server;
