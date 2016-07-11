@@ -3,7 +3,6 @@
 function FbLocation(){
 
 	this.getFbLocation = function (){
-
 		FB.api('/me?fields=location', function(response) {
       		var location = response.location.name;
       	});
@@ -14,5 +13,5 @@ function FbLocation(){
       $.getJSON(url, function(){
         console.log(data)
       });
-
+	}
 }

@@ -27,7 +27,7 @@
 
 <div class="btn-group btn-group-justified" role="group" aria-label="find-weather">
 <div class="btn-group" role="group">
- 		<button type="button" class="btn btn-default" id="facebook-button" onclick="">Facebook (Please Login)</button>
+ 		<button type="button" class="btn btn-default" id="facebook-button" onclick="facebook.getAPI(facebook.getFbLocation(facebook.partiallyApplyGetWeather(facebook.makeWeatherTable)))">Facebook (Please Login)</button>
  </div><div class="btn-group" role="group"> 
  		<button type="button" class="btn btn-default" id="ip-button" onclick=myLocation.getLocationWithIp(myLocation.partiallyApplyGetWeather(myLocation.makeWeatherTable))>IP Address</button>
  </div><div class="btn-group" role="group"><center>

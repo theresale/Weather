@@ -2,8 +2,8 @@
 
 var myWeather = new Weather();
 var facebook = new Facebook();
-//facebook.testAPI(facebook.partialApplyGetFb);
-facebook.getAPI();
+//facebook.getAPI(facebook.partialApplyGetFb);
+//facebook.getAPI();
 
 //var myFbLocation = new fbLocation();
 //myFbLocation.getFbLocation();
