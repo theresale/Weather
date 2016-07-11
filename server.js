@@ -27,6 +27,19 @@ app.get("/weather", function(request,response){
 	var url = "https://api.forecast.io/forecast/f61a611d2c990a1d977d6264c9a5d364/"+request.query.latitude+","+request.query.longitude;
 	getJSON(url, function(error,data){
 		//console.log(data.daily.data);
+		var date = new Date();
+		databaseManager.readLocation(request.query.latitude, request.query.longitude, date);
+
+		response.send(JSON.stringify(data));
+	});
+});
+
+/*
+app.get("/weather", function(request,response){
+	var url = "https://api.forecast.io/forecast/f61a611d2c990a1d977d6264c9a5d364/"+request.query.latitude+","+request.query.longitude;
+	getJSON(url, function(error,data){
+		//console.log(data.daily.data);
+		databaseManager.readLocation(43.0434, -87.8945, '2016-07-11 00:00:00-05');
 		databaseManager.saveLocation(request.query.latitude, request.query.longitude, "07/11/2016", function(locationId){
 			for(var i = 0; i<5;i++){
 				//console.log(data.daily.data[i]);
@@ -35,15 +48,13 @@ app.get("/weather", function(request,response){
 									 data.daily.data[i].summary,
 									 data.daily.data[i].precipProbability,
 									 locationId);
-
-			}
+			} 
 		});
-
 		response.send(JSON.stringify(data));
-		});
+	});
 });
 
-/*var useApiToGetWeather = function(request,response){
+var useApiToGetWeather = function(request,response){
 	var url = "https://api.forecast.io/forecast/f61a611d2c990a1d977d6264c9a5d364/"+request.query.latitude+","+request.query.longitude;
 	getJSON(url, function(error,data){
 		//databaseManager.saveLocation;
