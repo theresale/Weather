@@ -1,5 +1,5 @@
 "use strict";
- function Facebook(){ 
+function Facebook(){ 
 
   window.fbAsyncInit = function() {
     FB.init({
@@ -10,82 +10,103 @@
   };
 
   (function(d, s, id){
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) {return;}
-      js = d.createElement(s); js.id = id;
-      js.src = "https://connect.facebook.net/en_US/sdk.js";
-      fjs.parentNode.insertBefore(js, fjs);
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement(s); js.id = id;
+    js.src = "https://connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
 
-  function statusChangeCallback(response) {
-      console.log('statusChangeCallback');
-      console.log(response);
-      if (response.status === 'connected') {
-        testAPI();
-      } else if (response.status === 'not_authorized') {
-        document.getElementById('status').innerHTML = 'Please log ' +
-        'into this app.';
-      } else {
-        document.getElementById('status').innerHTML = 'Please log ' +
-        'into Facebook.';
-      }
+  var statusChangeCallback = function(response) {
+    console.log('statusChangeCallback');
+    console.log(response);
+    if (response.status === 'connected') {
+      testAPI();
+    } else if (response.status === 'not_authorized') {
+      document.getElementById('status').innerHTML = 'Please log ' +
+      'into this app.';
+    } else {
+      document.getElementById('status').innerHTML = 'Please log ' +
+      'into Facebook.';
+    }
   }
 
   window.checkLoginState = function() {
-      FB.getLoginStatus(function(response) {
-        statusChangeCallback(response);
-      });
+    FB.getLoginStatus(function(response) {
+      statusChangeCallback(response);
+    });
   }
   window.fbAsyncInit = function() {
-      FB.init({
-        appId      : '995990820516035',
+    FB.init({
+      appId      : '995990820516035',
       cookie     : true,  // enable cookies to allow the server to access 
                           // the session
       xfbml      : true,  // parse social plugins on this page
       version    : 'v2.5' // use graph api version 2.5
-  });
+    });
 
-  FB.getLoginStatus(function(response) {
+    FB.getLoginStatus(function(response) {
       statusChangeCallback(response);
-  });
+    });
   };
     // Load the SDK asynchronously
-  (function(d, s, id) {
+    (function(d, s, id) {
       var js, fjs = d.getElementsByTagName(s)[0];
       if (d.getElementById(id)) return;
       js = d.createElement(s); js.id = id;
       js.src = "https://connect.facebook.net/en_US/sdk.js";
       fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
+    }(document, 'script', 'facebook-jssdk'));
     // Here we run a very simple test of the Graph API after login is
     // successful.  See statusChangeCallback() for when this call is made.
 
-  function login(){
-    FB.login(function(response){
+    function login(){
+      FB.login(function(response){
 
-    }, {scope: 'user_location' });
-  }
+      }, {scope: 'user_location' });
+    }
 
-  function testAPI(callback) {
+    function testAPI() {
       console.log('Welcome!  Fetching your information.... ');
       FB.api('/me?fields=location', function(response) {
-      console.log(response.location.name);
-        
+        console.log(response.location.name);
       });
+    }
+
+    var getAPI = function(){
+      return FB.api('/me?fields=location', function(response) {
+        this.getFbLocation(response.location.name, this.getWeather());
+      });
+    }
+
+  /*this.getFbLocation = function(location,callback){
+      var url = "https://maps.googleapis.com/maps/api/geocode/json?address="+location+"&key=AIzaSyDp2dB8A9x9BAGplFjWAqWHNUi256c6pWk";
+      $.getJSON(url, function(){
+          callback(geometry.)
+      });
+    }*/
+
+    this.partiallyApplyGetWeather = function(callback){
+      return (latitude,longitude)=>{
+        this.getWeather(latitude,longitude,callback);
+      };
+    };
+
+    this.getWeather = function(latitude,longitude,callback){
+      $.getJSON ("/weather?latitude="+latitude+"&longitude="+longitude,function(data){
+        callback(data.daily);
+      });
+    }
+
+    this.makeWeatherTable = function(forecast){
+      var buildTable = "<table class='table'><tr><th>" + "Day" + "</th><th>" + "High Temp" + "</th><th>" + "Low Temp" + "</th><th>" + "Summary" + "</th></tr>";
+      for (var i=0; i < 5; i++) { 
+        buildTable += "<tr><td>" + (i+1) + "</td><td>" + forecast.data[i].temperatureMax + "</td><td>" + forecast.data[i].temperatureMin + "</td><td>" + forecast.data[i].summary + "</td></tr>"; 
+      }
+      document.getElementById('buildTable').innerHTML = buildTable;
+    }
+
   }
-
-
-}
- /* function getLocationWithFacebook(){
-    var url = "https://maps.googleapis.com/maps/api/geocode/json?address="+location+"&key=AIzaSyDp2dB8A9x9BAGplFjWAqWHNUi256c6pWk";
-    $.getJSON(url, function(){
-      console.log(data)
-    });
-  }
-
-  this.getWeather = function(latitude,longitude){
-    $.getJSON ("/weather?latitude="+latitude+"&longitude="+longitude,function(data){
-      console.log(data.daily);*/
 
 
 

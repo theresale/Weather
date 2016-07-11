@@ -4,8 +4,10 @@
   "description": "weather forecast lab",
   "main": "server.js",
   "dependencies": {
+    "bootstrap-sass": "^3.3.6",
     "node-sass": "^3.8.0",
-    "pg": "^6.0.1"
+    "pg": "^6.0.1",
+    "pug": "^2.0.0-beta3"
   },
   "devDependencies": {},
   "scripts": {

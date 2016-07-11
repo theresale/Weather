@@ -1,6 +1,6 @@
 var express = require("express");
 var app = express();
-var databaseManager = require("./databse-manager.js");
+//var databaseManager = require("./database-manager.js");
 
 app.use(express.static("public"));
 app.listen(3000,function(){
@@ -23,20 +23,29 @@ function getJSON(url, callback) { //replacement for $.getJSON
 	});
 }
 
-var useApiToGetWeather = function(request,response){
+app.get("/weather", function(request,response){
 	var url = "https://api.forecast.io/forecast/f61a611d2c990a1d977d6264c9a5d364/"+request.query.latitude+","+request.query.longitude;
 	getJSON(url, function(error,data){
-		databaseManager.saveLocation;
+		console.log(error);
+		console.log(data);
+		response.send(JSON.stringify(data));
+		});
+});
+
+/*var useApiToGetWeather = function(request,response){
+	var url = "https://api.forecast.io/forecast/f61a611d2c990a1d977d6264c9a5d364/"+request.query.latitude+","+request.query.longitude;
+	getJSON(url, function(error,data){
+		//databaseManager.saveLocation;
 		response.send(JSON.stringify(data));
 	});
 }
 
-var useDatabaseToGetWeather = function(request.response){
+&var useDatabaseToGetWeather = function(request.response){
 	databaseManager.readLocation
 }
 
 app.get("/weather", function(request,response){	
 	useApiToGetWeather(request,response);
 	
-});
+});*/
 

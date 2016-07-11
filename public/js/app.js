@@ -2,9 +2,13 @@
 
 var myWeather = new Weather();
 var facebook = new Facebook();
+//facebook.testAPI(facebook.partialApplyGetFb);
+facebook.getAPI();
+
+//var myFbLocation = new fbLocation();
+//myFbLocation.getFbLocation();
 
 var address = new Address();
-//address.getLocationWithInput();
 address.getLocationWithInput(address.partiallyApplyGetWeather(address.makeWeatherTable));
 
 var myLocation = new IpLocation();
