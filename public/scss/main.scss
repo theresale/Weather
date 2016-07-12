@@ -1,9 +1,12 @@
 $primary-color: green;
-$secondary-color:
-$header-font:
-$body-font:
+$secondary-color: blue;
+
 
 header[role="banner"] {
      background-image: url(/images/header2.jpeg);
      background-repeat: no-repeat;
+}
+
+h1 {
+	font-color: $primary-color;
 }
